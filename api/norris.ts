@@ -24,3 +24,21 @@ export const getCategories: QueryFunction<NorrisCategories> = async ({
     )
     return res.data
 }
+
+export const getJoke: QueryFunction<NorrisJoke> = async ({
+    queryKey,
+    signal,
+}) => {
+    const [category] = queryKey
+    const url = new URL(`${API_BASE_URL}/jokes/random`)
+
+    if (typeof category === 'string' && category !== 'all') {
+        url.searchParams.append('category', category)
+    }
+
+    const response = await axios.get<NorrisJoke>(url.toString(), {
+        signal,
+    })
+
+    return response.data
+}
