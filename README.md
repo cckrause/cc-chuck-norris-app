@@ -1,27 +1,32 @@
-# Radix UI Example
+# Chuck Norris Jokes Example
 
-This example showcases a few basic Radix UI components
+This example showcases the [chucknorris-api](https://api.chucknorris.io/).
 
-## Deploy your own
+## Technologies
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+-   Nextjs
+-   tanstack react-query (never used it, so i wanted to try it out)
+-   Redix UI
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/radix-ui&project-name=radix-ui&repository-name=radix-ui)
+## Some thoughts
+
+### What i did
+
+-   follwoed the KISS (but not simpler) principle
+-   I implemented the abort controller api to abort the request when the user navigates away from the page or if the user is thrashing the shuffle button.
+-   tried to keep as close to the requirements as possible
+
+### What i didn't
+
+-   did not use SSR as the API is public and not hosted at the same data center as the frontend. IMHO there would no advantage in doing so.
+-   did not use a state management library as i did not want to introduce a new dependency.
+-   did not implement the 404 page 🙈
+-   did no optimization of any kind (ui / performance / bundlesize etc.)
+-   No unit-tests as required 😭
+-   Could have used `fetch` instead of `axios`, but i wanted to try out latest `axios` version even if i used very little of the api.
 
 ## How to use
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example radix-ui radix-ui-app
 ```
-
-```bash
-yarn create next-app --example radix-ui radix-ui-app
+npm run dev
 ```
-
-```bash
-pnpm create next-app --example radix-ui radix-ui-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
