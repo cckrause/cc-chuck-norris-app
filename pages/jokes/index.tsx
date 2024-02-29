@@ -5,14 +5,17 @@ import { useQuery } from '@tanstack/react-query'
 import { Joke } from '../../components/Joke'
 import { getJoke } from '../../api/norris'
 
-const Jokes: React.FunctionComponent = () => {
+export const Jokes: React.FunctionComponent<{ category?: string }> = ({
+    category = 'all',
+}) => {
     const {
         data: joke,
         isLoading,
+        isError,
         isRefetching,
         refetch,
     } = useQuery({
-        queryKey: ['all'],
+        queryKey: [category],
         queryFn: getJoke,
     })
     const router = useRouter()
@@ -33,7 +36,14 @@ const Jokes: React.FunctionComponent = () => {
                     <ShuffleIcon />
                 </Button>
             </Flex>
-            <Joke isLoading={isLoading || isRefetching} joke={joke?.value} />
+            {isError ? (
+                'Category not found.'
+            ) : (
+                <Joke
+                    isLoading={isLoading || isRefetching}
+                    joke={joke?.value}
+                />
+            )}
         </>
     )
 }
