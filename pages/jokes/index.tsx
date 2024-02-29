@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { Joke } from '../../components/Joke'
 import { getJoke } from '../../api/norris'
+import { ErrorNotice } from '../../components/ErrorNotice'
 
 export const Jokes: React.FunctionComponent<{ category?: string }> = ({
     category = 'all',
@@ -17,6 +18,7 @@ export const Jokes: React.FunctionComponent<{ category?: string }> = ({
     } = useQuery({
         queryKey: [category],
         queryFn: getJoke,
+        retry: false, // disable auto retry if inital request fails
     })
     const router = useRouter()
 
@@ -37,7 +39,7 @@ export const Jokes: React.FunctionComponent<{ category?: string }> = ({
                 </Button>
             </Flex>
             {isError ? (
-                'Category not found.'
+                <ErrorNotice message="Category not found." />
             ) : (
                 <Joke
                     isLoading={isLoading || isRefetching}
